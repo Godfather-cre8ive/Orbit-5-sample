@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orbit-5 Energy & Technology</title>
+
+  <!-- ============================================================
+       FAVICON HERE
+       Replace the href below with your actual favicon path.
+       e.g. <link rel="icon" type="image/png" href="favicon.png" />
+  ============================================================= -->
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- ============================================================
+       PAYSTACK INLINE SCRIPT
+       Required for Pay Now functionality
+  ============================================================= -->
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+
+  <style>
+    /* =========================================================
+       CSS CUSTOM PROPERTIES / THEME
+    ========================================================= */
+    :root {
+      --sun: #F5A623;
+      --sun-deep: #E8861A;
+      --leaf: #2D7D46;
+      --leaf-light: #3A9E5A;
+      --night: #0D1117;
+      --panel: #111820;
+      --surface: #161E28;
+      --card: #1C2633;
+      --card-hover: #223040;
+      --border: rgba(255,255,255,0.07);
+      --text: #EDF2F7;
+      --muted: #8A9BB0;
+      --accent: #F5A623;
+      --wa-green: #25D366;
+      --danger: #E53E3E;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 8px 32px rgba(0,0,0,0.45);
+      --shadow-glow: 0 0 30px rgba(245,166,35,0.25);
+      --font-display: 'Plus Jakarta Sans', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --font-price: 'Nunito', sans-serif;
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--night);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+    button { cursor: pointer; font-family: var(--font-body); border: none; outline: none; }
+    a { color: inherit; text-decoration: none; }
+
+    /* =========================================================
+       SCROLLBAR
+    ========================================================= */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--panel); }
+    ::-webkit-scrollbar-thumb { background: var(--leaf); border-radius: 4px; }
+
+    /* =========================================================
+       UTILITY
+    ========================================================= */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 50px;
+      background: var(--sun);
+      color: var(--night);
+    }
+    .tag.green { background: var(--leaf); color: #fff; }
+
+    /* =========================================================
+       HEADER
+    ========================================================= */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      background: rgba(13,17,23,0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-img {
+       width:86px;
+       height:51px;
+       border-radius:10px;
+       object-fit:contain; }
+
+    /* ============================================================
+       LOGO HERE
+       Replace the .logo-placeholder div with:
+       <img src="your-logo.png" alt="O' FIVE Logo" class="logo-img" />
+       and add  .logo-img { width: 44px; height: 44px; border-radius: 10px; object-fit: contain; }
+    ============================================================= */
+    .logo-placeholder {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--sun), var(--leaf));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--night);
+      flex-shrink: 0;
+    }
+    .brand-text h1 {
+      font-family: var(--font-display);
+      font-size: 25px;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: 0.2em;
+    }
+    .brand-text span {
+      font-size: 10px;
+      color: var(--sun);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    #cart-btn {
+      position: relative;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 9px 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 600;
+      transition: background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+    #cart-btn:active { transform: scale(0.95); }
+    #cart-btn:hover { background: var(--card-hover); border-color: var(--sun); }
+    .cart-icon { font-size: 18px; }
+    #cart-count {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: var(--sun);
+      color: var(--night);
+      font-size: 10px;
+      font-weight: 800;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0);
+      transition: opacity var(--transition), transform var(--transition);
+    }
+    #cart-count.visible { opacity: 1; transform: scale(1); }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 60px 20px 80px;
+      text-align: center;
+      background: var(--panel);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(245,166,35,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(45,125,70,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-tagline {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--sun);
+      margin-bottom: 18px;
+      padding: 5px 14px;
+      border: 1px solid rgba(245,166,35,0.35);
+      border-radius: 50px;
+    }
+    .hero h2 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 8vw, 64px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+    }
+    .hero h2 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--sun), var(--leaf-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 32px;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--sun), var(--sun-deep));
+      color: var(--night);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 28px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 24px rgba(245,166,35,0.4);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(245,166,35,0.5); }
+    .btn-primary:active { transform: scale(0.97); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px 28px;
+      border-radius: 50px;
+      border: 1.5px solid var(--border);
+      cursor: pointer;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .btn-outline:hover { border-color: var(--muted); background: var(--card); }
+
+    /* Stats row */
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 50px;
+      flex-wrap: wrap;
+    }
+    .stat-item { text-align: center; }
+    .stat-item .num {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--sun);
+    }
+    .stat-item .label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* =========================================================
+       SECTION HEADERS
+    ========================================================= */
+    .section-header {
+      margin-bottom: 28px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 5vw, 32px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .section-header p { color: var(--muted); font-size: 14px; margin-top: 4px; }
+    .see-all {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--sun);
+      cursor: pointer;
+    }
+
+    /* =========================================================
+       FEATURED PRODUCTS
+    ========================================================= */
+    #featured { padding: 64px 0; }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    @media (min-width: 600px) {
+      .featured-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .featured-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      position: relative;
+    }
+    .featured-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      border-color: rgba(245,166,35,0.25);
+    }
+    .featured-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 2;
+    }
+    .featured-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+    }
+    .featured-img-placeholder {
+      width: 100%;
+      height: 220px;
+      background: linear-gradient(135deg, var(--surface), var(--panel));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 72px;
+    }
+    .featured-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .featured-body h3 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .featured-benefit {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 18px;
+      flex: 1;
+    }
+    .featured-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    /* Price display */
+    .price-wrap { display: flex; flex-direction: column; gap: 1px; }
+    .price {
+      font-family: var(--font-price);
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--sun);
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+    }
+    .price-old {
+      font-family: var(--font-price);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: line-through;
+      letter-spacing: 0;
+      line-height: 1;
+    }
+    /* Discount badge */
+    .discount-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      padding: 2px 7px;
+      border-radius: 50px;
+      background: rgba(229,62,62,0.18);
+      color: #ff6b6b;
+      border: 1px solid rgba(229,62,62,0.3);
+      margin-left: 5px;
+      vertical-align: middle;
+    }
+    .btn-cart {
+      background: linear-gradient(135deg, var(--sun), var(--sun-deep));
+      color: var(--night);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 11px 20px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+      white-space: nowrap;
+    }
+    .btn-cart:hover { transform: scale(1.04); box-shadow: 0 4px 16px rgba(245,166,35,0.4); }
+    .btn-cart:active { transform: scale(0.96); }
+
+    /* =========================================================
+       WHY SOLAR
+    ========================================================= */
+    #why-solar {
+      padding: 64px 0;
+      background: var(--panel);
+      position: relative;
+      overflow: hidden;
+    }
+    #why-solar::before {
+      content: '';
+      position: absolute;
+      right: -100px;
+      top: -80px;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(45,125,70,0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 768px) {
+      .benefits-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .benefit-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 18px;
+      text-align: center;
+      transition: transform var(--transition), border-color var(--transition);
+    }
+    .benefit-card:hover { transform: translateY(-3px); border-color: rgba(45,125,70,0.4); }
+    .benefit-icon { font-size: 36px; margin-bottom: 12px; }
+    .benefit-card h4 {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .benefit-card p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+    /* =========================================================
+       PRODUCT CAROUSEL
+    ========================================================= */
+    #products { padding: 64px 0; }
+
+    .carousel-wrapper {
+      position: relative;
+    }
+    .carousel-track {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 16px;
+      scrollbar-width: none;
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
+    .carousel-track::-webkit-scrollbar-thumb { display: none; }
+
+    .product-card {
+      flex: 0 0 160px;
+      scroll-snap-align: start;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+    @media (min-width: 480px) { .product-card { flex: 0 0 180px; } }
+    @media (min-width: 768px) { .product-card { flex: 0 0 200px; } }
+
+    .product-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(245,166,35,0.3);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+    }
+    .product-card:active { transform: scale(0.97); }
+
+    .product-img {
+      width: 100%;
+      height: 130px;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+    }
+    .product-info { padding: 12px; }
+    .product-info h4 {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .product-info .price { font-size: 16px; }
+    .product-info .price-old { font-size: 12px; }
+
+    /* Carousel arrows (desktop) */
+    .carousel-arrow {
+      display: none;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      z-index: 10;
+      transition: background var(--transition);
+      color: var(--text);
+    }
+    .carousel-arrow:hover { background: var(--card-hover); }
+    .carousel-arrow.left { left: -20px; }
+    .carousel-arrow.right { right: -20px; }
+    @media (min-width: 768px) { .carousel-arrow { display: flex; } }
+
+    /* =========================================================
+       CONTACT SECTION
+    ========================================================= */
+    #contact {
+      padding: 64px 0;
+      background: var(--panel);
+    }
+    .contact-inner {
+      background: linear-gradient(135deg, var(--card), var(--surface));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 70% at 50% 0%, rgba(245,166,35,0.08), transparent 70%);
+      pointer-events: none;
+    }
+    .contact-inner h2 {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 5vw, 32px);
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .contact-inner p { color: var(--muted); margin-bottom: 28px; font-size: 15px; }
+    .wa-big-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--wa-green);
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 16px 32px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 24px rgba(37,211,102,0.35);
+    }
+    .wa-big-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(37,211,102,0.5); }
+    .wa-big-btn:active { transform: scale(0.97); }
+    .coverage {
+      margin-top: 22px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .coverage strong { color: var(--sun); }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+    footer {
+      background: var(--night);
+      border-top: 1px solid var(--border);
+      padding: 28px 20px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    footer strong { color: var(--sun); }
+
+    /* =========================================================
+       FLOATING WHATSAPP BUTTON
+    ========================================================= */
+    #wa-float {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      z-index: 800;
+      width: 56px;
+      height: 56px;
+      background: var(--wa-green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+      cursor: pointer;
+      animation: pulse-wa 2.5s ease-in-out infinite;
+      border: none;
+      font-size: 26px;
+    }
+    @keyframes pulse-wa {
+      0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.5); }
+      50% { box-shadow: 0 4px 36px rgba(37,211,102,0.75); }
+    }
+
+    /* =========================================================
+       MODAL (Product Detail Popup)
+    ========================================================= */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    @media (min-width: 600px) {
+      .modal-overlay { align-items: center; }
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius) var(--radius) 0 0;
+      width: 100%;
+      max-width: 520px;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+      padding: 28px 24px 36px;
+    }
+    @media (min-width: 600px) {
+      .modal {
+        border-radius: var(--radius);
+        transform: scale(0.92);
+      }
+      .modal-overlay.open .modal { transform: scale(1); }
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .modal-close:hover { color: var(--text); background: var(--card-hover); }
+
+    .modal-img {
+      width: 100%;
+      height: 200px;
+      background: var(--surface);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .modal-img img { width: 100%; height: 100%; object-fit: cover; }
+    .modal h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .modal-desc { font-size: 14px; color: var(--muted); margin-bottom: 16px; line-height: 1.6; }
+    .modal-price {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .modal-price .price { font-size: 30px; }
+    .modal-price .price-old { font-size: 16px; }
+
+    .qty-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      overflow: hidden;
+      width: fit-content;
+    }
+    .qty-btn {
+      width: 44px;
+      height: 44px;
+      background: var(--surface);
+      border: none;
+      color: var(--text);
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .qty-btn:hover { background: var(--card-hover); }
+    #modal-qty {
+      width: 56px;
+      text-align: center;
+      background: var(--card);
+      color: var(--text);
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      height: 44px;
+    }
+
+    /* =========================================================
+       CART PANEL
+    ========================================================= */
+    #cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 950;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    #cart-overlay.open { opacity: 1; pointer-events: all; }
+
+    #cart-panel {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius) var(--radius) 0 0;
+      z-index: 960;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(110%);
+      transition: transform 0.38s cubic-bezier(0.4,0,0.2,1);
+    }
+    @media (min-width: 768px) {
+      #cart-panel {
+        top: 0;
+        left: auto;
+        right: 0;
+        bottom: 0;
+        width: 420px;
+        max-height: 100vh;
+        border-radius: 0;
+        border-left: 1px solid var(--border);
+        border-top: none;
+        border-right: none;
+        border-bottom: none;
+        transform: translateX(110%);
+      }
+      #cart-panel.open { transform: translateX(0); }
+    }
+    #cart-panel.open { transform: translateY(0); }
+
+    .cart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 22px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .cart-header h3 { font-family: var(--font-display); font-size: 18px; font-weight: 800; }
+    .cart-close {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .cart-close:hover { color: var(--text); background: var(--card-hover); }
+
+    #cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 22px;
+    }
+    .cart-empty {
+      text-align: center;
+      padding: 50px 20px;
+      color: var(--muted);
+    }
+    .cart-empty .empty-icon { font-size: 52px; margin-bottom: 12px; }
+    .cart-empty p { font-size: 15px; }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cart-item:last-child { border-bottom: none; }
+    .cart-item-img {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .cart-item-img img { width: 100%; height: 100%; object-fit: cover; }
+    .cart-item-info { flex: 1; min-width: 0; }
+    .cart-item-info h4 { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cart-item-info .price { font-size: 14px; font-weight: 700; color: var(--sun); }
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ci-qty-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .ci-qty-btn:hover { background: var(--card-hover); }
+    .ci-qty { font-size: 14px; font-weight: 700; min-width: 24px; text-align: center; }
+    .ci-remove {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(229,62,62,0.12);
+      border: 1px solid rgba(229,62,62,0.25);
+      color: var(--danger);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      margin-left: 4px;
+    }
+    .ci-remove:hover { background: rgba(229,62,62,0.25); }
+
+    /* Delivery options inside cart */
+    .delivery-section {
+      padding: 14px 22px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .delivery-section h4 { font-size: 13px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 10px; }
+    .delivery-options { display: flex; gap: 10px; margin-bottom: 12px; }
+    .delivery-opt {
+      flex: 1;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      cursor: pointer;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      transition: border-color var(--transition), background var(--transition);
+      background: var(--surface);
+      color: var(--muted);
+    }
+    .delivery-opt.selected {
+      border-color: var(--sun);
+      background: rgba(245,166,35,0.1);
+      color: var(--text);
+    }
+    .delivery-opt .opt-icon { font-size: 20px; display: block; margin-bottom: 4px; }
+
+    #address-field {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 13px;
+      resize: none;
+      height: 72px;
+      transition: border-color var(--transition);
+    }
+    #address-field:focus { outline: none; border-color: var(--sun); }
+    #address-field::placeholder { color: var(--muted); }
+    #address-wrap { display: none; }
+    #address-wrap.visible { display: block; }
+
+    /* Cart totals */
+    .cart-totals {
+      padding: 14px 22px;
+      flex-shrink: 0;
+    }
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: var(--muted);
+    }
+    .total-row.grand {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text);
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+    .total-row.grand .amount { color: var(--sun); }
+
+    .checkout-btns { padding: 14px 22px 28px; flex-shrink: 0; display: flex; flex-direction: column; gap: 10px; }
+    .btn-whatsapp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--wa-green);
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 15px 24px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+    }
+    .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(37,211,102,0.45); }
+    .btn-whatsapp:active { transform: scale(0.97); }
+
+    .btn-pay {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 14px 24px;
+      border-radius: 50px;
+      border: 1.5px solid var(--border);
+      cursor: pointer;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .btn-pay:hover { border-color: var(--muted); background: var(--card); }
+
+    /* =========================================================
+       TOAST NOTIFICATION
+    ========================================================= */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--leaf);
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 12px 24px;
+      border-radius: 50px;
+      z-index: 2000;
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      white-space: nowrap;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+    /* =========================================================
+       RESPONSIVE TWEAKS
+    ========================================================= */
+    @media (min-width: 768px) {
+      #wa-float { bottom: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       FLOATING WHATSAPP BUTTON
+       WHATSAPP NUMBER HERE: replace +2348000000000 with your number
+       Format: country code + number, no spaces or dashes
+  ============================================================= -->
+  <button id="wa-float" title="Chat on WhatsApp" onclick="openWhatsApp('Hi! I want to know more about your solar products.')">
+    💬
+  </button>
+
+  <!-- Toast notification -->
+  <div id="toast"></div>
+
+  <!-- ============================================================
+       HEADER
+  ============================================================= -->
+  <header>
+    <div class="header-inner">
+      <div class="logo-area">
+        <!-- ============================================================
+             LOGO HERE
+             Replace the div below with your logo image:
+             <img src="logo.png" alt="O' FIVE Logo" class="logo-img" />
+             Add to CSS: .logo-img { width:44px; height:44px; border-radius:10px; object-fit:contain; }
+        ============================================================= -->
+        <a href="#"><img src="assets/logo.png" alt="ORBIT-5 Logo" class="logo-img" /></a>
+        <!--div class="brand-text">
+          <h1>ORBIT-5</h1>
+          <span>Energy &amp; Technology</span>
+        </div>-->
+      </div>
+      <div class="header-actions">
+        <button id="cart-btn" onclick="openCart()">
+          <span class="cart-icon">🛒</span>
+          <span id="cart-label">Cart</span>
+          <span id="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       HERO SECTION
+  ============================================================= -->
+  <section class="hero">
+    <p class="hero-tagline">⚡ Solar-Powered Living</p>
+    <h2>Power Your World<br />with <em>Clean Energy</em></h2>
+    <p>Premium solar gadgets for homes, offices, and businesses. Never get caught by power outages again.</p>
+    <div class="hero-cta">
+      <button class="btn-primary" onclick="document.getElementById('featured').scrollIntoView({behavior:'smooth'})">
+        Shop Now →
+      </button>
+      <button class="btn-outline" onclick="document.getElementById('why-solar').scrollIntoView({behavior:'smooth'})">
+        Why Solar?
+      </button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="num">500+</div>
+        <div class="label">Happy Customers</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">2yr</div>
+        <div class="label">Warranty</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">🚀</div>
+        <div class="label">Fast Delivery</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURED PRODUCTS
+  ============================================================= -->
+  <section id="featured">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2>⭐ Featured Products</h2>
+          <p>Our most popular solar picks</p>
+        </div>
+      </div>
+      <div class="featured-grid" id="featured-grid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHY SOLAR SECTION
+  ============================================================= -->
+  <section id="why-solar">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2>☀️ Why Go Solar?</h2>
+          <p>Smart reasons to switch today</p>
+        </div>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">🔌</div>
+          <h4>No More Outages</h4>
+          <p>Stay powered even when NEPA fails. Solar energy keeps your devices running 24/7.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">💰</div>
+          <h4>Save on Bills</h4>
+          <p>Cut your electricity costs dramatically. Solar pays for itself within months.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🌿</div>
+          <h4>Eco-Friendly</h4>
+          <p>Zero emissions, zero noise. Clean energy for a better Nigeria and a better planet.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🛡️</div>
+          <h4>Long-Lasting</h4>
+          <p>Quality-tested products built to last. Backed by our 2-year warranty promise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRODUCT CAROUSEL
+  ============================================================= -->
+  <section id="products">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2>🛍️ All Products</h2>
+          <p>Swipe to explore our full range</p>
+        </div>
+      </div>
+      <div class="carousel-wrapper">
+        <button class="carousel-arrow left" id="arrow-left" onclick="scrollCarousel(-1)">‹</button>
+        <div class="carousel-track" id="carousel-track">
+          <!-- Populated by JS -->
+        </div>
+        <button class="carousel-arrow right" id="arrow-right" onclick="scrollCarousel(1)">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT / TRUST SECTION
+  ============================================================= -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <h2>🤝 Talk to Us Directly</h2>
+        <p>Have questions? Need a custom order? Our team is ready to help.<br/>Serving and delivering <strong>nationwide across Nigeria.</strong></p>
+        <!-- WHATSAPP NUMBER HERE: replace +2348000000000 below -->
+        <button class="wa-big-btn" onclick="openWhatsApp('Hello! I would like to know more about ORBIT-5 solar products.')">
+          💬 Chat on WhatsApp
+        </button>
+        <p class="coverage">📍 Pickup available in <strong>Anambra &amp Lagos State</strong> · Nationwide delivery via courier</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================= -->
+  <footer>
+    <p>© 2026 <strong>ORBIT-5 Energy & Technology</strong> · Nigeria</p>
+    <p style="margin-top:6px;">Empowering Nigeria with Clean Solar Energy ☀️</p>
+  </footer>
+
+  <!-- ============================================================
+       PRODUCT DETAIL MODAL
+  ============================================================= -->
+  <div class="modal-overlay" id="modal-overlay" onclick="handleModalOverlayClick(event)">
+    <div class="modal" id="modal" style="position:relative;">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-img" id="modal-img"></div>
+      <h3 id="modal-name"></h3>
+      <p class="modal-desc" id="modal-desc"></p>
+      <div class="modal-price" id="modal-price"></div>
+      <div class="qty-row">
+        <button class="qty-btn" onclick="changeModalQty(-1)">−</button>
+        <input type="number" id="modal-qty" value="1" min="1" max="99" readonly />
+        <button class="qty-btn" onclick="changeModalQty(1)">+</button>
+      </div>
+      <button class="btn-cart" style="width:100%;padding:14px;font-size:15px;" onclick="addFromModal()">
+        Add to Cart
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       CART PANEL
+  ============================================================= -->
+  <div id="cart-overlay" onclick="closeCart()"></div>
+  <div id="cart-panel">
+    <div class="cart-header">
+      <h3>🛒 Your Cart</h3>
+      <button class="cart-close" onclick="closeCart()">✕</button>
+    </div>
+
+    <div id="cart-items">
+      <!-- Populated by JS -->
+    </div>
+
+    <!-- Delivery Options -->
+    <div class="delivery-section">
+      <h4>Delivery Method</h4>
+      <div class="delivery-options">
+        <div class="delivery-opt selected" id="opt-pickup" onclick="selectDelivery('pickup')">
+          <span class="opt-icon">🏪</span>
+          Pickup<br/><small style="color:var(--leaf);font-weight:700;">Free</small>
+        </div>
+        <div class="delivery-opt" id="opt-delivery" onclick="selectDelivery('home')">
+          <span class="opt-icon">🚚</span>
+          Home Delivery<br/><small id="delivery-fee-label" style="color:var(--sun);font-weight:700;">+₦1,500</small>
+        </div>
+      </div>
+      <div id="address-wrap">
+        <textarea id="address-field" placeholder="Enter address, nearest landmark, preferred delivery time"></textarea>
+      </div>
+    </div>
+
+    <!-- Totals -->
+    <div class="cart-totals">
+      <div class="total-row">
+        <span>Subtotal</span>
+        <span id="subtotal-val">₦0</span>
+      </div>
+      <div class="total-row">
+        <span>Delivery Fee</span>
+        <span id="delivery-val">₦0</span>
+      </div>
+      <div class="total-row grand">
+        <span>Total</span>
+        <span class="amount" id="total-val">₦0</span>
+      </div>
+    </div>
+
+    <!-- Checkout Buttons -->
+    <div class="checkout-btns">
+      <button class="btn-whatsapp" onclick="checkoutWhatsApp()">
+        💬 Order on WhatsApp
+      </button>
+      <!-- Pay Now via Paystack -->
+      <button class="btn-pay" onclick="checkoutPaystack()">
+        💳 Pay Now (Card / Bank)
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================= -->
+  <script>
+    /* ============================================================
+       CONFIGURATION — Edit these values to customize the store
+    ============================================================= */
+
+    // WHATSAPP NUMBER HERE
+    // Replace with your WhatsApp number including country code
+    // Example: '2348012345678'  (no + sign, no spaces)
+    const WHATSAPP_NUMBER = '2348124194337';
+
+    // DELIVERY FEE (Home Delivery) in Naira
+    const HOME_DELIVERY_FEE = 2000;
+
+    /* ============================================================
+       PRODUCT DATABASE
+       Edit this array to add, remove, or modify products.
+       Fields:
+         id            - unique number
+         name          - product name
+         price         - sale/current price in Naira (number)
+         originalPrice - original/crossed-out price in Naira (number, must be > price)
+         emoji         - emoji as placeholder image (remove when you add real images)
+         image         - path to product image e.g. 'images/fan.jpg' (leave '' for emoji)
+         desc          - product description (for modal)
+         benefit       - short benefit line (for featured cards)
+         featured      - true/false (show in featured section)
+         badge         - 'Best Seller' | 'Popular' | '' (for featured cards)
+    ============================================================= */
+    const PRODUCTS = [
+      {
+        id: 1,
+        name: 'Solar Rechargeable Fan',
+        price: 16500,
+        originalPrice: 22000,
+        emoji: '🌀',
+        image: 'images/img1.png',
+        desc: 'Powerful 3-speed solar rechargeable fan with built-in battery backup. Works all night even without sun. Perfect for bedrooms, offices, and shops. USB charging port included.',
+        benefit: 'Stay cool 24/7 — no light, no problem!',
+        featured: true,
+        badge: 'Best Seller'
+      },
+      {
+        id: 2,
+        name: 'Solar Power Bank (20,000mAh)',
+        price: 14500,
+        originalPrice: 19000,
+        emoji: '🔋',
+        image: 'images/img6.png',
+        desc: 'High-capacity 20,000mAh solar power bank with dual USB output. Charges your phone up to 5x on a single charge. Solar panel for emergency top-up. Compact and durable casing.',
+        benefit: 'Charge phones anywhere, anytime!',
+        featured: true,
+        badge: 'Popular'
+      },
+      {
+        id: 3,
+        name: 'Solar Lantern (Foldable)',
+        price: 6500,
+        originalPrice: 8500,
+        emoji: '🪔',
+        image: 'images/img5.png',
+        desc: 'Bright foldable solar LED lantern. 3 lighting modes: high, low, flashing. Charges in 6–8 hours of sunlight. Water-resistant. Ideal for indoor and outdoor use.',
+        benefit: '',
+        featured: false,
+        badge: ''
+      },
+      {
+        id: 4,
+        name: 'Rechargeable Power Station',
+        price: 455000,
+        originalPrice: 512500,
+        emoji: '💡',
+        image: 'images/img8.png',
+        desc: 'All-in-one solar street light with motion sensor. 2000 lumens output. Auto on/off at dusk/dawn. Waterproof IP65. Easy pole mounting. Great for compounds, warehouses, and streets.',
+        benefit: '',
+        featured: false,
+        badge: ''
+      },
+      {
+        id: 5,
+        name: 'Mini Solar Generator (500W)',
+        price: 189000,
+        originalPrice: 215000,
+        emoji: '⚡',
+        image: 'images/img7.png',
+        desc: 'Portable 500W solar generator with 3 AC outlets, 2 USB-A, 1 USB-C, and DC output. Powers TVs, fans, and small appliances. Silent operation. Replaceable lithium battery.',
+        benefit: '',
+        featured: true,
+        badge: 'Popular'
+      },
+      {
+        id: 6,
+        name: 'Solar Rechargeable Table Fan',
+        price: 9700,
+        originalPrice: 12500,
+        emoji: '💧',
+        image: 'images/img2.png',
+        desc: 'Efficient 12V solar-powered water pump for boreholes and wells. Lift up to 30 meters. Flow rate 2.5m³/hour. Requires 2 x 100W solar panels (sold separately).',
+        benefit: '',
+        featured: true,
+        badge: 'Bestseller'
+      },
+      {
+        id: 7,
+        name: 'Student Hanging Lamp',
+        price: 2800,
+        originalPrice: 4000,
+        emoji: '🌟',
+        image: 'images/img3.png',
+        desc: 'Set of 6 decorative solar garden stake lights. Auto on/off at dusk. Waterproof IP44. Warm white LEDs. No wiring needed — just push into the ground and enjoy.',
+        benefit: '',
+        featured: false,
+        badge: ''
+      },
+      {
+        id: 8,
+        name: 'Solar Light (100W)',
+        price: 28500,
+        originalPrice: 36000,
+        emoji: '📷',
+        image: 'images/img4.png',
+        desc: '1080p solar-powered WiFi security camera with night vision and motion alerts. 360° rotation. Cloud & SD card storage. Works with smartphone app. IP66 waterproof.',
+        benefit: '',
+        featured: false,
+        badge: ''
+      },
+      {
+        id: 9,
+        name: 'Solar Rechargeable Earbuds',
+        price: 17200,
+        originalPrice: 19500,
+        emoji: '🦟',
+        image: 'images/img10.png',
+        desc: 'UV solar mosquito killer trap. Covers up to 40 sq. meters. Silent operation, no chemicals. Automatic operation at dusk. Safe for kids and pets.',
+        benefit: '',
+        featured: false,
+        badge: ''
+      },
+      {
+        id: 10,
+        name: 'Portable Solar Power Bank (10000mAh)',
+        price: 22000,
+        originalPrice: 30000,
+        emoji: '☀️',
+        image: 'images/img9.png',
+        desc: 'Foldable 100W monocrystalline solar panel with MC4 connector. Efficiency: 23%. Compatible with most solar generators and 12V battery systems. Comes with carrying case.',
+        benefit: '',
+        featured: false,
+        badge: ''
+      },
+    ];
+
+    /* ============================================================
+       STATE
+    ============================================================= */
+    let cart = JSON.parse(localStorage.getItem('ofive_cart') || '[]');
+    let currentModalProduct = null;
+    let deliveryMethod = 'pickup'; // 'pickup' | 'home'
+
+    /* ============================================================
+       UTILITIES
+    ============================================================= */
+    function formatNaira(amount) {
+      return '₦' + amount.toLocaleString('en-NG');
+    }
+
+    /* Returns discount percentage string e.g. "-23%" */
+    function discountPct(price, originalPrice) {
+      if (!originalPrice || originalPrice <= price) return '';
+      return '-' + Math.round((1 - price / originalPrice) * 100) + '%';
+    }
+
+    /* Renders the price HTML block with slashed original price */
+    function priceHTML(price, originalPrice, priceClass) {
+      const pct = discountPct(price, originalPrice);
+      const sizeClass = priceClass || '';
+      return `
+        <div class="price-wrap">
+          <div>
+            <span class="price ${sizeClass}">${formatNaira(price)}</span>
+            ${pct ? `<span class="discount-tag">${pct}</span>` : ''}
+          </div>
+          ${originalPrice && originalPrice > price
+            ? `<span class="price-old">${formatNaira(originalPrice)}</span>`
+            : ''}
+        </div>`;
+    }
+
+    function saveCart() {
+      localStorage.setItem('ofive_cart', JSON.stringify(cart));
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(t._timer);
+      t._timer = setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
+    /* ============================================================
+       CART COUNT
+    ============================================================= */
+    function updateCartCount() {
+      const total = cart.reduce((s, i) => s + i.qty, 0);
+      const badge = document.getElementById('cart-count');
+      const label = document.getElementById('cart-label');
+      badge.textContent = total;
+      if (total > 0) {
+        badge.classList.add('visible');
+        label.textContent = 'Cart (' + total + ')';
+      } else {
+        badge.classList.remove('visible');
+        label.textContent = 'Cart';
+      }
+    }
+
+    /* ============================================================
+       RENDER FEATURED PRODUCTS
+    ============================================================= */
+    function renderFeatured() {
+      const grid = document.getElementById('featured-grid');
+      const featured = PRODUCTS.filter(p => p.featured);
+      grid.innerHTML = featured.map(p => `
+        <div class="featured-card">
+          ${p.badge ? `<div class="featured-badge"><span class="tag">${p.badge}</span></div>` : ''}
+          <div class="featured-img-placeholder">
+            ${p.image
+              ? `<img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;" />`
+              : p.emoji
+            }
+          </div>
+          <div class="featured-body">
+            <h3>${p.name}</h3>
+            <p class="featured-benefit">${p.benefit || p.desc.split('.')[0] + '.'}</p>
+            <div class="featured-footer">
+              ${priceHTML(p.price, p.originalPrice)}
+              <button class="btn-cart" onclick="addToCart(${p.id})">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* ============================================================
+       RENDER CAROUSEL
+    ============================================================= */
+    function renderCarousel() {
+      const track = document.getElementById('carousel-track');
+      track.innerHTML = PRODUCTS.map(p => `
+        <div class="product-card" onclick="openModal(${p.id})">
+          <div class="product-img">
+            ${p.image
+              ? `<img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;" />`
+              : p.emoji
+            }
+          </div>
+          <div class="product-info">
+            <h4>${p.name}</h4>
+            ${priceHTML(p.price, p.originalPrice)}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function scrollCarousel(dir) {
+      const track = document.getElementById('carousel-track');
+      track.scrollBy({ left: dir * 220, behavior: 'smooth' });
+    }
+
+    /* ============================================================
+       MODAL
+    ============================================================= */
+    function openModal(productId) {
+      const p = PRODUCTS.find(x => x.id === productId);
+      if (!p) return;
+      currentModalProduct = p;
+      document.getElementById('modal-name').textContent = p.name;
+      document.getElementById('modal-desc').textContent = p.desc;
+      document.getElementById('modal-price').innerHTML = priceHTML(p.price, p.originalPrice);
+      document.getElementById('modal-qty').value = 1;
+
+      const imgEl = document.getElementById('modal-img');
+      if (p.image) {
+        imgEl.innerHTML = `<img src="${p.image}" alt="${p.name}" />`;
+      } else {
+        imgEl.textContent = p.emoji;
+        imgEl.style.fontSize = '80px';
+      }
+
+      document.getElementById('modal-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+      currentModalProduct = null;
+    }
+
+    function handleModalOverlayClick(e) {
+      if (e.target === document.getElementById('modal-overlay')) closeModal();
+    }
+
+    function changeModalQty(delta) {
+      const input = document.getElementById('modal-qty');
+      const newVal = Math.max(1, Math.min(99, parseInt(input.value) + delta));
+      input.value = newVal;
+    }
+
+    function addFromModal() {
+      if (!currentModalProduct) return;
+      const qty = parseInt(document.getElementById('modal-qty').value);
+      addToCart(currentModalProduct.id, qty);
+      closeModal();
+    }
+
+    /* ============================================================
+       ADD TO CART
+    ============================================================= */
+    function addToCart(productId, qty = 1) {
+      const p = PRODUCTS.find(x => x.id === productId);
+      if (!p) return;
+      const existing = cart.find(i => i.id === productId);
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({ id: p.id, name: p.name, price: p.price, emoji: p.emoji, image: p.image, qty });
+      }
+      saveCart();
+      updateCartCount();
+      renderCartItems();
+      showToast(`✅ ${p.name} added to cart`);
+    }
+
+    /* ============================================================
+       CART OPEN / CLOSE
+    ============================================================= */
+    function openCart() {
+      document.getElementById('cart-overlay').classList.add('open');
+      document.getElementById('cart-panel').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      renderCartItems();
+      updateTotals();
+    }
+
+    function closeCart() {
+      document.getElementById('cart-overlay').classList.remove('open');
+      document.getElementById('cart-panel').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    /* ============================================================
+       RENDER CART ITEMS
+    ============================================================= */
+    function renderCartItems() {
+      const container = document.getElementById('cart-items');
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="cart-empty">
+            <div class="empty-icon">🛒</div>
+            <p>Your cart is empty.<br/>Add some solar goodies!</p>
+          </div>`;
+        return;
+      }
+      container.innerHTML = cart.map(item => `
+        <div class="cart-item" id="cart-item-${item.id}">
+          <div class="cart-item-img">
+            ${item.image
+              ? `<img src="${item.image}" alt="${item.name}" />`
+              : item.emoji || '📦'
+            }
+          </div>
+          <div class="cart-item-info">
+            <h4>${item.name}</h4>
+            <span class="price">${formatNaira(item.price)}</span>
+          </div>
+          <div class="cart-item-controls">
+            <button class="ci-qty-btn" onclick="changeCartQty(${item.id}, -1)">−</button>
+            <span class="ci-qty">${item.qty}</span>
+            <button class="ci-qty-btn" onclick="changeCartQty(${item.id}, 1)">+</button>
+            <button class="ci-remove" onclick="removeCartItem(${item.id})" title="Remove">✕</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function changeCartQty(productId, delta) {
+      const item = cart.find(i => i.id === productId);
+      if (!item) return;
+      item.qty = Math.max(1, item.qty + delta);
+      saveCart();
+      updateCartCount();
+      renderCartItems();
+      updateTotals();
+    }
+
+    function removeCartItem(productId) {
+      cart = cart.filter(i => i.id !== productId);
+      saveCart();
+      updateCartCount();
+      renderCartItems();
+      updateTotals();
+    }
+
+    /* ============================================================
+       DELIVERY
+    ============================================================= */
+    function selectDelivery(method) {
+      deliveryMethod = method;
+      document.getElementById('opt-pickup').classList.toggle('selected', method === 'pickup');
+      document.getElementById('opt-delivery').classList.toggle('selected', method === 'home');
+      document.getElementById('address-wrap').classList.toggle('visible', method === 'home');
+      updateTotals();
+    }
+
+    /* ============================================================
+       TOTALS
+    ============================================================= */
+    function updateTotals() {
+      const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      const delivery = deliveryMethod === 'home' ? HOME_DELIVERY_FEE : 0;
+      const total = subtotal + delivery;
+      document.getElementById('subtotal-val').textContent = formatNaira(subtotal);
+      document.getElementById('delivery-val').textContent = delivery === 0 ? 'Free' : formatNaira(delivery);
+      document.getElementById('total-val').textContent = formatNaira(total);
+    }
+
+    /* ============================================================
+       WHATSAPP CHECKOUT
+       WHATSAPP NUMBER HERE — same as top-of-script constant
+    ============================================================= */
+    function openWhatsApp(message) {
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+    }
+
+    function checkoutWhatsApp() {
+      if (cart.length === 0) { showToast('Your cart is empty!'); return; }
+      const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      const delivery = deliveryMethod === 'home' ? HOME_DELIVERY_FEE : 0;
+      const total = subtotal + delivery;
+      const address = document.getElementById('address-field').value.trim();
+
+      let lines = [];
+      lines.push('🛒 *New Order — O\' FIVE Energy & Technology*');
+      lines.push('');
+      lines.push('*Products:*');
+      cart.forEach(item => {
+        lines.push(`• ${item.name} x${item.qty} = ${formatNaira(item.price * item.qty)}`);
+      });
+      lines.push('');
+      lines.push(`*Subtotal:* ${formatNaira(subtotal)}`);
+      lines.push(`*Delivery:* ${delivery === 0 ? 'Pickup (Free)' : formatNaira(delivery)}`);
+      lines.push(`*Total:* ${formatNaira(total)}`);
+      lines.push('');
+      lines.push(`*Delivery Method:* ${deliveryMethod === 'pickup' ? '🏪 Pickup' : '🚚 Home Delivery'}`);
+      if (address) lines.push(`*Address / Note:* ${address}`);
+      lines.push('');
+      lines.push('Please confirm my order. Thank you!');
+
+      openWhatsApp(lines.join('\n'));
+    }
+
+    /* ============================================================
+       PAYSTACK CHECKOUT
+       PAYSTACK PUBLIC KEY HERE
+       Replace 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxx' with your actual public key.
+       You can find it at https://dashboard.paystack.com/#/settings/developer
+    ============================================================= */
+    function checkoutPaystack() {
+      if (cart.length === 0) { showToast('Your cart is empty!'); return; }
+
+      const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      const delivery = deliveryMethod === 'home' ? HOME_DELIVERY_FEE : 0;
+      const total = subtotal + delivery;
+
+      // Prompt for email (Paystack requires it)
+      const email = prompt('Please enter your email address for payment receipt:');
+      if (!email || !email.includes('@')) {
+        showToast('Valid email required for payment.');
+        return;
+      }
+
+      // PAYSTACK PUBLIC KEY HERE — replace the key below
+      const handler = PaystackPop.setup({
+        key: 'pk_test_b05963b5db438ab4ac51ca967b6ec59346b32560', // ← REPLACE THIS
+        email: email,
+        amount: total * 100, // Paystack uses kobo (multiply by 100)
+        currency: 'NGN',
+        ref: 'ORBIT-5-' + Date.now(),
+        metadata: {
+          cart_items: cart.map(i => `${i.name} x${i.qty}`).join(', '),
+          delivery: deliveryMethod,
+          address: document.getElementById('address-field').value
+        },
+        callback: function(response) {
+          // Payment successful
+          showToast('✅ Payment successful! Ref: ' + response.reference);
+          // Optionally: clear cart after payment
+          cart = [];
+          saveCart();
+          updateCartCount();
+          renderCartItems();
+          updateTotals();
+          closeCart();
+          // TODO: Send confirmation to your backend with response.reference
+          alert('Payment successful! Reference: ' + response.reference + '\n\nWe will process your order shortly. Thank you!');
+        },
+        onClose: function() {
+          showToast('Payment cancelled.');
+        }
+      });
+      handler.openIframe();
+    }
+
+    /* ============================================================
+       INIT
+    ============================================================= */
+    function init() {
+      renderFeatured();
+      renderCarousel();
+      updateCartCount();
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+
+</body>
+</html>
