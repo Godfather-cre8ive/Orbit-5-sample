@@ -756,7 +756,7 @@
       margin-bottom: 8px;
     }
     .modal-desc { font-size: 14px; color: var(--muted); margin-bottom: 16px; line-height: 1.6; }
-    .modal-benefit { font-size: 14px; color: var(--muted); margin-bottom: 16px; line-height: 1.6; }
+    .modal-benefit { font-size: 14px; color: var(--muted); margin-bottom: 16px; line-height: 1.6; white-space: pre-line; }
     .modal-price {
       display: flex;
       align-items: baseline;
@@ -1162,7 +1162,7 @@
       <div class="section-header">
         <div>
           <h2>Featured Products</h2>
-          <p>Our most popular solar picks</p>
+          <p>Our most popular picks</p>
         </div>
       </div>
       <div class="featured-grid" id="featured-grid">
@@ -1363,6 +1363,7 @@
          image         - path to product image e.g. 'images/fan.jpg' (leave '' for emoji)
          desc          - product description (for modal)
          benefit       - short benefit line (for featured cards)
+         benefitjs:    - list of products specifications
          featured      - true/false (show in featured section)
          badge         - 'Best Seller' | 'Popular' | '' (for featured cards)
     ============================================================= */
@@ -1370,24 +1371,32 @@
       {
         id: 1,
         name: 'Itel Power Tank (500W)',
-        price: 350000,
+        price: 351250,
         originalPrice: 382000,
         image: 'images/img1.jpg',
         desc: 'All-in-one portable solar generator and energy storage system designed for homes and offices.',
         benefit: '• Battery Capacity: 1kWh LiFePO₄ battery stack.<br>' +
         '• Cycle Lifespan: Rated for 6000+ cycles (up to 10 years of use).<br>' +
         '• Charging: Dual charging, capable of recharging in about 2 hours.',
+        benefitjs: "• Battery Capacity: 1kWh LiFePO₄ battery stack.\n" +
+          "• Cycle Lifespan: Rated for 6000+ cycles (up to 10 years of use).\n" +
+          "• Charging: Dual charging, capable of recharging in about 2 hours.",
         featured: true,
         badge: 'Best Seller'
       },
       {
         id: 2,
-        name: 'Itel Energy Power Go Pro',
-        price: 14500,
-        originalPrice: 19000,
+        name: 'Itel Power Go Pro',
+        price: 157300,
+        originalPrice: 172500,
         image: 'images/img6.jfif',
-        desc: 'High-capacity 20,000mAh solar power bank with dual USB output. Charges your phone up to 5x on a single charge. Solar panel for emergency top-up. Compact and durable casing.',
-        benefit: 'Charge phones anywhere, anytime!',
+        desc: 'A compact, portable LiFePO4 power station designed for everyday backup power, remote work, and outdoor use.',
+        benefit: '• Battery: 100,000mAh LiFePO4 battery rated up to 10 years of use.<br>' +
+        '• Output: 200W (400W peak), USB-C, 3 × USB-A ports, and 4 × DC ports.<br>' +
+        '• Charging: 100W via USB-C or Solar/DC input, reaching a full charge in roughly 4 hours.',
+        benefitjs: "• Capacity & Battery: 100,000mAh LiFePO4 battery rated up to 10 years of use.\n" +
+          "• Output: 200W (400W peak), USB-C, 3 × USB-A ports, and 4 × DC ports.\n" +
+          "• Charging: 100W via USB-C or Solar/DC input, reaching a full charge in roughly 4 hours.",
         featured: true,
         badge: 'Popular'
       },
@@ -1396,7 +1405,6 @@
         name: 'Solar Lantern (Foldable)',
         price: 6500,
         originalPrice: 8500,
-        emoji: '🪔',
         image: 'images/img5.png',
         desc: 'Bright foldable solar LED lantern. 3 lighting modes: high, low, flashing. Charges in 6–8 hours of sunlight. Water-resistant. Ideal for indoor and outdoor use.',
         benefit: '',
@@ -1616,7 +1624,7 @@
       currentModalProduct = p;
       document.getElementById('modal-name').textContent = p.name;
       document.getElementById('modal-desc').textContent = p.desc;
-      document.getElementById('modal-benefit').textContent = p.benefit;
+      document.getElementById('modal-benefit').textContent = p.benefitjs;
       document.getElementById('modal-price').innerHTML = priceHTML(p.price, p.originalPrice);
       document.getElementById('modal-qty').value = 1;
 
