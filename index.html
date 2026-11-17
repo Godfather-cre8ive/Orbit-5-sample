@@ -1083,6 +1083,96 @@
     @media (min-width: 768px) {
       #wa-float { bottom: 30px; }
     }
+
+    .product-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0 16px;
+  height: 52px;
+}
+
+.search-box:focus-within {
+  border-color: var(--sun);
+}
+
+.search-box input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.search-box input::placeholder {
+  color: var(--muted);
+}
+
+.filter-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.filter-group select {
+  width: 100%;
+  min-width: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  color: var(--text);
+}
+
+#clear-filters {
+  grid-column: 1 / -1;
+  padding: 11px;
+  background: rgba(245, 166, 35, 0.10);
+  border: 1px solid rgba(245, 166, 35, 0.25);
+  color: var(--sun);
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.results-count {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+@media (min-width: 600px) {
+  .product-controls {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .search-box {
+    flex: 1;
+  }
+
+  .filter-group {
+    display: flex;
+  }
+
+  .filter-group select {
+    min-width: 140px;
+  }
+
+  #clear-filters {
+    white-space: nowrap;
+  }
+}
   </style>
 </head>
 <body>
@@ -1114,6 +1204,10 @@
         <a href="#"><img src="assets/logo.png" alt="ORBIT-5 Logo" class="logo-img" /></a>
       </div>
       <div class="header-actions">
+        <button id="cart-btn">
+          <a href="#products">
+            <span class="cart-icon">🔍</span>
+         </a>
         <button id="cart-btn" onclick="openCart()">
           <span class="cart-icon">🛒</span>
           <span id="cart-label">Cart</span>
@@ -1218,6 +1312,33 @@
           <p>Swipe to explore our full range</p>
         </div>
       </div>
+      <div class="product-controls">
+    <div class="search-box">
+      <span>🔍</span>
+      <input
+        type="search"
+        id="product-search"
+        placeholder="Search for products, brands..."
+        autocomplete="off"
+      />
+    </div>
+  
+    <div class="filter-group">
+      <select id="brand-filter">
+        <option value="">All Brands</option>
+      </select>
+  
+      <select id="type-filter">
+        <option value="">All Product Types</option>
+      </select>
+  
+      <button id="clear-filters" type="button">
+        Clear Filters
+      </button>
+    </div>
+  </div>
+  
+  <p id="results-count" class="results-count"></p>
       <div class="carousel-wrapper">
         <button class="carousel-arrow left" id="arrow-left" onclick="scrollCarousel(-1)">‹</button>
         <div class="carousel-track" id="carousel-track">
@@ -1373,6 +1494,8 @@
         name: 'Itel Power Tank (500W)',
         price: 351250,
         originalPrice: 382000,
+        brand: 'itel',
+        type: 'Power Station',
         image: 'images/img1.jpg',
         desc: 'All-in-one portable solar generator and energy storage system designed for homes and offices.',
         benefit: 'Reliable 1kWh LiFePO4 battery with 500W pure sine wave output, solar charging and instant UPS backup for your home and office.',
@@ -1387,6 +1510,8 @@
         name: 'Itel Power Go Pro',
         price: 157300,
         originalPrice: 172500,
+        brand: 'itel',
+        type: 'Power Station',
         image: 'images/img6.jfif',
         desc: 'A compact, portable LiFePO4 power station designed for everyday backup power, remote work, and outdoor use.',
         benefit: 'Powerful 100,000mAh LiFePO₄ battery with 200W AC output, 65W USB-C fast charging and solar support — reliable portable power for your essential devices, anywhere.',
@@ -1401,6 +1526,8 @@
         name: 'itel Power Go Station',
         price: 105000,
         originalPrice: 117800,
+        brand: 'itel',
+        type: 'Power Station',
         image: 'images/img3.jfif',
         desc: 'A compact, lightweight portable power station featuring a high-capacity LiFePO4 battery, designed to keep your essential devices powered at home, in the office, or on the go. Supports solar charging and multiple device connections.',
         benefit: 'Massive 100,000mAh LiFePO4 battery with 130W output, 65W USB-C fast charging and solar support — dependable backup power wherever you need it.',
@@ -1415,7 +1542,8 @@
         name: 'Rechargeable Power Station',
         price: 455000,
         originalPrice: 512500,
-        emoji: '💡',
+        brand: 'itel',
+        type: 'Power Station',
         image: 'images/img8.png',
         desc: 'All-in-one solar street light with motion sensor. 2000 lumens output. Auto on/off at dusk/dawn. Waterproof IP65. Easy pole mounting. Great for compounds, warehouses, and streets.',
         benefit: '',
@@ -1427,7 +1555,8 @@
         name: 'Mini Solar Generator (500W)',
         price: 189000,
         originalPrice: 215000,
-        emoji: '⚡',
+        brand: 'itel',
+        type: 'Power Station',
         image: 'images/img7.png',
         desc: 'Portable 500W solar generator with 3 AC outlets, 2 USB-A, 1 USB-C, and DC output. Powers TVs, fans, and small appliances. Silent operation. Replaceable lithium battery.',
         benefit: '',
@@ -1439,7 +1568,8 @@
         name: 'Solar Rechargeable Table Fan',
         price: 9700,
         originalPrice: 12500,
-        emoji: '💧',
+        brand: 'itel',
+        type: 'Power Station',
         image: 'images/img2.png',
         desc: 'Efficient 12V solar-powered water pump for boreholes and wells. Lift up to 30 meters. Flow rate 2.5m³/hour. Requires 2 x 100W solar panels (sold separately).',
         benefit: '',
@@ -1451,7 +1581,8 @@
         name: 'Student Hanging Lamp',
         price: 2800,
         originalPrice: 4000,
-        emoji: '🌟',
+        brand: 'itel',
+        type: 'Power Station',
         image: 'images/img3.png',
         desc: 'Set of 6 decorative solar garden stake lights. Auto on/off at dusk. Waterproof IP44. Warm white LEDs. No wiring needed — just push into the ground and enjoy.',
         benefit: '',
@@ -1463,7 +1594,8 @@
         name: 'Solar Light (100W)',
         price: 28500,
         originalPrice: 36000,
-        emoji: '📷',
+        brand: 'itel',
+        type: 'Power Station',
         image: 'images/img4.png',
         desc: '1080p solar-powered WiFi security camera with night vision and motion alerts. 360° rotation. Cloud & SD card storage. Works with smartphone app. IP66 waterproof.',
         benefit: '',
@@ -1475,7 +1607,8 @@
         name: 'Solar Rechargeable Earbuds',
         price: 17200,
         originalPrice: 19500,
-        emoji: '🦟',
+        brand: 'itel',
+        type: 'Power Station',
         image: 'images/img10.png',
         desc: 'UV solar mosquito killer trap. Covers up to 40 sq. meters. Silent operation, no chemicals. Automatic operation at dusk. Safe for kids and pets.',
         benefit: '',
@@ -1487,7 +1620,8 @@
         name: 'Portable Solar Power Bank (10000mAh)',
         price: 22000,
         originalPrice: 30000,
-        emoji: '☀️',
+        brand: 'itel',
+        type: 'Power Station',
         image: 'images/img9.png',
         desc: 'Foldable 100W monocrystalline solar panel with MC4 connector. Efficiency: 23%. Compatible with most solar generators and 12V battery systems. Comes with carrying case.',
         benefit: '',
@@ -1613,6 +1747,122 @@
       const track = document.getElementById('carousel-track');
       track.scrollBy({ left: dir * 220, behavior: 'smooth' });
     }
+
+    /* ============================================================
+          RENDER SEARCH AND FILTER
+        ============================================================= */
+    function populateProductFilters() {
+      const brandFilter = document.getElementById('brand-filter');
+      const typeFilter = document.getElementById('type-filter');
+
+      const brands = [...new Set(
+        PRODUCTS.map(p => p.brand).filter(Boolean)
+      )].sort();
+
+      const types = [...new Set(
+        PRODUCTS.map(p => p.type).filter(Boolean)
+      )].sort();
+
+      brandFilter.innerHTML =
+        '<option value="">All Brands</option>' +
+        brands.map(b => `<option value="${b}">${b}</option>`).join('');
+
+      typeFilter.innerHTML =
+        '<option value="">All Product Types</option>' +
+        types.map(t => `<option value="${t}">${t}</option>`).join('');
+    }
+
+    function filterProducts() {
+      const search = document
+        .getElementById('product-search')
+        .value.toLowerCase().trim();
+
+      const selectedBrand =
+        document.getElementById('brand-filter').value;
+
+      const selectedType =
+        document.getElementById('type-filter').value;
+
+      const filtered = PRODUCTS.filter(p => {
+        const searchableText = [
+          p.name,
+          p.brand,
+          p.type,
+          p.desc,
+          p.benefit
+        ].join(' ').toLowerCase();
+
+        return (
+          searchableText.includes(search) &&
+          (!selectedBrand || p.brand === selectedBrand) &&
+          (!selectedType || p.type === selectedType)
+        );
+      });
+
+      renderFilteredCarousel(filtered);
+    }
+
+    function renderFilteredCarousel(products) {
+      const track = document.getElementById('carousel-track');
+      const count = document.getElementById('results-count');
+
+      count.textContent =
+        `Showing ${products.length} of ${PRODUCTS.length} products`;
+
+      if (!products.length) {
+        track.innerHTML = `
+          <div class="no-products">
+            <span>🔍</span>
+            <h3>No products found</h3>
+            <p>Try another search or adjust your filters.</p>
+          </div>
+        `;
+        return;
+      }
+
+      track.innerHTML = products.map(p => `
+        <div class="product-card" onclick="openModal(${p.id})">
+          <div class="product-img">
+            ${p.image
+              ? `<img src="${p.image}" alt="${p.name}"
+                style="width:100%;height:100%;object-fit:cover;">`
+              : p.emoji || '📦'}
+          </div>
+
+          <div class="product-info">
+            <h4>${p.name}</h4>
+            ${priceHTML(p.price, p.originalPrice)}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function clearProductFilters() {
+      document.getElementById('product-search').value = '';
+      document.getElementById('brand-filter').value = '';
+      document.getElementById('type-filter').value = '';
+
+      filterProducts();
+    }
+
+    function initProductFilters() {
+      populateProductFilters();
+
+      document.getElementById('product-search')
+        .addEventListener('input', filterProducts);
+
+      document.getElementById('brand-filter')
+        .addEventListener('change', filterProducts);
+
+      document.getElementById('type-filter')
+        .addEventListener('change', filterProducts);
+
+      document.getElementById('clear-filters')
+        .addEventListener('click', clearProductFilters);
+
+      filterProducts();
+    }
+
 
     /* ============================================================
        MODAL
@@ -1866,7 +2116,7 @@
     ============================================================= */
     function init() {
       renderFeatured();
-      renderCarousel();
+      initProductFilters();
       updateCartCount();
     }
 
