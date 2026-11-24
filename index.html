@@ -35,7 +35,7 @@
       --night: #0D1117;
       --panel: #111820;
       --surface: #161E28;
-      --card: #1C2633;
+      --card: #102D46;
       --card-hover: #223040;
       --border: rgba(255,255,255,0.07);
       --text: #EDF2F7;
@@ -1208,11 +1208,11 @@
           <a href="#products">
             <span class="cart-icon">🔍</span>
          </a>
-        <button id="cart-btn" onclick="openCart()">
+       <!-- <button id="cart-btn" onclick="openCart()">
           <span class="cart-icon">🛒</span>
           <span id="cart-label">Cart</span>
           <span id="cart-count">0</span>
-        </button>
+        </button> -->
       </div>
     </div>
   </header>
@@ -1221,12 +1221,12 @@
        HERO SECTION
   ============================================================= -->
   <section class="hero">
-    <p class="hero-tagline">⚡ STEADY POWER FOR YOU</p>
-    <h2>Enjoy <em>Steady Power</em><br />at Affordable Cost</h2>
-    <p>Premium quality &amp; affordable power optimization systems and gadgets. For students, homes, offices &amp; businesses.</p>
+    <p class="hero-tagline">⚡ WITHIN YOUR REACH</p>
+    <h2><em>Steady Power</em><br />for Everyday Life</h2>
+    <p>Discorver affordable solar power stations, solar panels and customised energy solutions for students, homes, offices &amp; growing businesses.</p>
     <div class="hero-cta">
       <button class="btn-primary" onclick="document.getElementById('featured').scrollIntoView({behavior:'smooth'})">
-        Shop Now →
+        Explore Our Solutions →
       </button>
       <button class="btn-outline" onclick="document.getElementById('why-solar').scrollIntoView({behavior:'smooth'})">
         Why Orbit-5?
@@ -1255,8 +1255,8 @@
     <div class="container">
       <div class="section-header">
         <div>
-          <h2>Featured Products</h2>
-          <p>Our most popular picks</p>
+          <h2>Featured Packages</h2>
+          <p>Our most special packages</p>
         </div>
       </div>
       <div class="featured-grid" id="featured-grid">
@@ -1278,24 +1278,24 @@
       </div>
       <div class="benefits-grid">
         <div class="benefit-card">
-          <div class="benefit-icon">🔌</div>
-          <h4>No More Outages</h4>
-          <p>Stay powered even with NEPA failures and high cost of fuel.</p>
+          <div class="benefit-icon">💰</div>
+          <h4>Affordable Solutions</h4>
+          <p>We help our customers find practical power options that suit their needs and budgets.</p>
         </div>
         <div class="benefit-card">
           <div class="benefit-icon">💰</div>
-          <h4>Save on Bills</h4>
-          <p>Cut your electricity costs dramatically. Affordable solar based solution pays for itself within months.</p>
+          <h4>Practical Solutions</h4>
+          <p>We focus on understanding what you need to power before recommending a solution.</p>
         </div>
         <div class="benefit-card">
-          <div class="benefit-icon">🌿</div>
-          <h4>Eco-Friendly</h4>
-          <p>Zero emissions, zero noise. Clean energy for a cleaner and peaceful environment.</p>
+          <div class="benefit-icon">🔌</div>
+          <h4>Professional Installation</h4>
+          <p>We provide technical installation and post installation support for all solar project.</p>
         </div>
         <div class="benefit-card">
           <div class="benefit-icon">🛡️</div>
-          <h4>Long-Lasting</h4>
-          <p>Quality-tested products built to last. Backed by our 1-year warranty promise.</p>
+          <h4>Long Lasting</h4>
+          <p>We offer only quality tested products and systems that are built to last. Backed by our 1-year warranty promise.</p>
         </div>
       </div>
     </div>
@@ -1502,7 +1502,7 @@
         benefitjs: "• Battery Capacity: 1kWh LiFePO₄ battery stack.\n" +
           "• Cycle Lifespan: Rated for 6000+ cycles (up to 10 years of use).\n" +
           "• Charging: Dual charging, capable of recharging in about 2 hours.",
-        featured: true,
+        featured: false,
         badge: 'Best Seller'
       },
       {
@@ -1534,7 +1534,7 @@
         benefitjs: "• Battery: 100,000mAh (320Wh) LiFePO4 battery with 3,000+ charge cycles.\n" +
           "• Output: 130W maximum output, 65W USB-C fast charging and multiple USB/DC ports.\n" +
           "• Charging: Supports up to 100W solar, USB-C and DC charging.",
-        featured: true,
+        featured: false,
         badge: 'Popular'
       },
       {
@@ -1560,7 +1560,7 @@
         image: 'images/img7.png',
         desc: 'Portable 500W solar generator with 3 AC outlets, 2 USB-A, 1 USB-C, and DC output. Powers TVs, fans, and small appliances. Silent operation. Replaceable lithium battery.',
         benefit: '',
-        featured: true,
+        featured: false,
         badge: 'Popular'
       },
       {
@@ -1573,7 +1573,7 @@
         image: 'images/img2.png',
         desc: 'Efficient 12V solar-powered water pump for boreholes and wells. Lift up to 30 meters. Flow rate 2.5m³/hour. Requires 2 x 100W solar panels (sold separately).',
         benefit: '',
-        featured: true,
+        featured: false,
         badge: 'Bestseller'
       },
       {
@@ -1629,6 +1629,43 @@
         badge: ''
       },
     ];
+
+    const COMBO = [
+      {
+          id: 1,
+          name: 'Campus Lite Package',
+          price: 351250,
+          originalPrice: 382000,
+          brand: 'Orbit 5',
+          type: 'Combo',
+          image: 'images/img1.jpg',
+          desc: 'All-in-one portable solar generator and energy storage system designed for homes and offices.',
+          benefit: 'Reliable 1kWh LiFePO4 battery with 500W pure sine wave output, solar charging and instant UPS backup for your home and office.',
+          benefitjs: "• Battery Capacity: 1kWh LiFePO₄ battery stack.\n" +
+            "• Cycle Lifespan: Rated for 6000+ cycles (up to 10 years of use).\n" +
+            "• Charging: Dual charging, capable of recharging in about 2 hours.",
+          featured: true,
+          badge: 'Students'
+        },
+
+        {
+          id: 2,
+          name: 'Campus Pro Package',
+          price: 351250,
+          originalPrice: 382000,
+          brand: 'Orbit 5',
+          type: 'Combo',
+          image: 'images/img1.jpg',
+          desc: 'All-in-one portable solar generator and energy storage system designed for homes and offices.',
+          benefit: 'Reliable 1kWh LiFePO4 battery with 500W pure sine wave output, solar charging and instant UPS backup for your home and office.',
+          benefitjs: "• Battery Capacity: 1kWh LiFePO₄ battery stack.\n" +
+            "• Cycle Lifespan: Rated for 6000+ cycles (up to 10 years of use).\n" +
+            "• Charging: Dual charging, capable of recharging in about 2 hours.",
+          featured: true,
+          badge: 'Students'
+        },
+    ];
+
 
     /* ============================================================
        STATE
@@ -1700,7 +1737,7 @@
     ============================================================= */
     function renderFeatured() {
       const grid = document.getElementById('featured-grid');
-      const featured = PRODUCTS.filter(p => p.featured);
+      const featured = COMBO.filter(p => p.featured);
       grid.innerHTML = featured.map(p => `
         <div class="featured-card">
           ${p.badge ? `<div class="featured-badge"><span class="tag">${p.badge}</span></div>` : ''}
