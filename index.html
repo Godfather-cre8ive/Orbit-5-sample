@@ -1208,11 +1208,11 @@
           <a href="#products">
             <span class="cart-icon">🔍</span>
          </a>
-       <!-- <button id="cart-btn" onclick="openCart()">
+        <button id="cart-btn" onclick="openCart()">
           <span class="cart-icon">🛒</span>
           <span id="cart-label">Cart</span>
           <span id="cart-count">0</span>
-        </button> -->
+        </button>
       </div>
     </div>
   </header>
@@ -1249,7 +1249,7 @@
   </section>
 
   <!-- ============================================================
-       FEATURED PRODUCTS
+       FEATURED PACKAGES
   ============================================================= -->
   <section id="featured">
     <div class="container">
@@ -1375,6 +1375,25 @@
   </footer>
 
   <!-- ============================================================
+       COMBO DETAIL MODAL
+  ============================================================= -->
+  <div class="modal-overlay" id="fmodal-overlay" onclick="handleFModalOverlayClick(event)">
+    <div class="modal" id="fmodal" style="position:relative;">
+      <button class="modal-close" onclick="closeFModal()">✕</button>
+      <div class="modal-img" id="fmodal-img"></div>
+      <h3 id="fmodal-name"></h3>
+      <p class="modal-desc" id="fmodal-desc"></p>
+      <p class="modal-benefit" id="fmodal-benefit"></p>
+      <div class="modal-price" id="fmodal-price"></div>
+      <div class="checkout-btns">
+        <button class="btn-whatsapp" onclick="continueWhatsApp()">
+          💬 Continue on WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
        PRODUCT DETAIL MODAL
   ============================================================= -->
   <div class="modal-overlay" id="modal-overlay" onclick="handleModalOverlayClick(event)">
@@ -1452,7 +1471,7 @@
       <!-- Pay Now via Paystack -->
       <button class="btn-pay" onclick="checkoutPaystack()">
         💳 Pay Now (Card / Bank)
-      </button>-->
+      </button>
     </div>
   </div>
 
@@ -1737,22 +1756,22 @@
     ============================================================= */
     function renderFeatured() {
       const grid = document.getElementById('featured-grid');
-      const featured = COMBO.filter(p => p.featured);
-      grid.innerHTML = featured.map(p => `
-        <div class="featured-card">
-          ${p.badge ? `<div class="featured-badge"><span class="tag">${p.badge}</span></div>` : ''}
+      const featured = COMBO.filter(c => c.featured);
+      grid.innerHTML = featured.map(c => `
+        <div class="featured-card" onclick="openFModal(${c.id})">
+          ${c.badge ? `<div class="featured-badge"><span class="tag">${c.badge}</span></div>` : ''}
           <div class="featured-img-placeholder">
-            ${p.image
-              ? `<img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;" />`
-              : p.emoji
+            ${c.image
+              ? `<img src="${c.image}" alt="${c.name}" style="width:100%;height:100%;object-fit:cover;" />`
+              : c.emoji
             }
           </div>
           <div class="featured-body">
-            <h3>${p.name}</h3>
-            <p class="featured-benefit">${p.benefit || p.desc.split('.')[0] + '.'}</p>
+            <h3>${c.name}</h3>
+            <p class="featured-benefit">${c.benefit || c.desc.split('.')[0] + '.'}</p>
             <div class="featured-footer">
-              ${priceHTML(p.price, p.originalPrice)}
-              <button class="btn-cart" onclick="addToCart(${p.id})">Add to Cart</button>
+              ${priceHTML(c.price, c.originalPrice)}
+              <button class="btn-cart" onclick="addToCart(${c.id})">Add to Cart</button>
             </div>
           </div>
         </div>
@@ -1900,6 +1919,39 @@
       filterProducts();
     }
 
+/* ============================================================
+       FEATURED MODAL
+    ============================================================= */
+    function openFModal(comboId) {
+      const c = COMBO.find(x => x.id === comboId);
+      if (!c) return;
+      currentFModalCombo = c;
+      document.getElementById('fmodal-name').textContent = c.name;
+      document.getElementById('fmodal-desc').textContent = c.desc;
+      document.getElementById('fmodal-benefit').textContent = c.benefitjs;
+      document.getElementById('fmodal-price').innerHTML = priceHTML(c.price, c.originalPrice);
+
+      const imgEl = document.getElementById('fmodal-img');
+      if (c.image) {
+        imgEl.innerHTML = `<img src="${c.image}" alt="${c.name}" />`;
+      } else {
+        imgEl.textContent = c.emoji;
+        imgEl.style.fontSize = '80px';
+      }
+
+      document.getElementById('fmodal-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeFModal() {
+      document.getElementById('fmodal-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+      currentModalProduct = null;
+    }
+
+    function handleFModalOverlayClick(e) {
+      if (e.target === document.getElementById('fmodal-overlay')) closeModal();
+    }
 
     /* ============================================================
        MODAL
@@ -2077,7 +2129,7 @@
       const address = document.getElementById('address-field').value.trim();
 
       let lines = [];
-      lines.push('🛒 *New Order — O\' FIVE Energy & Technology*');
+      lines.push('🛒 *New Order — OrbitFive Technologies*');
       lines.push('');
       lines.push('*Products:*');
       cart.forEach(item => {
@@ -2095,6 +2147,27 @@
 
       openWhatsApp(lines.join('\n'));
     }
+
+    function continueWhatsApp() {
+      const combo = currentFModalCombo;
+
+      if (!combo) {
+        showToast('Please select a combo package first.');
+        return;
+      }
+
+      const message = [
+        'Hello, I am interested in this ORBIT-5 package:',
+        '',
+        `*Package:* ${combo.name}`,
+        `*Price:* ${formatNaira(combo.price)}`,
+        '',
+        'Please share more details about this package. Thank you!'
+      ].join('\n');
+
+      openWhatsApp(message);
+    }
+
 
     /* ============================================================
        PAYSTACK CHECKOUT
