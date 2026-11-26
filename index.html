@@ -1273,7 +1273,7 @@
       <div class="section-header">
         <div>
           <h2>Why Choose Orbit-5?</h2>
-          <p>Smart reasons get our offer today</p>
+          <p>Smart reasons to take our offers today</p>
         </div>
       </div>
       <div class="benefits-grid">
@@ -1356,7 +1356,7 @@
     <div class="container">
       <div class="contact-inner">
         <h2>Talk to Us Directly</h2>
-        <p>Have questions? Need a custom order? Our team is ready to help.<br/>Serving and delivering <strong>nationwide across Nigeria.</strong></p>
+        <p>Have questions? Need a custom order? Tight on budget? Our team is ready to help.<br/>Serving and delivering <strong>nationwide across Nigeria.</strong></p>
         <!-- WHATSAPP NUMBER HERE: replace +2348000000000 below -->
         <button class="wa-big-btn" onclick="openWhatsApp('Hello! I would like to know more about ORBIT-5 solar products.')">
           💬 Chat on WhatsApp
@@ -1370,8 +1370,8 @@
        FOOTER
   ============================================================= -->
   <footer>
-    <p>© 2026 <strong>ORBIT-5 Energy &amp; Technology</strong> · Nigeria</p>
-    <p style="margin-top:6px;"><i>Empowering Nigerians with Reliable Power</i><br />Website Powered by Godfather Creative Planet | +234 812 419 4337</p>
+    <p>© 2026 <strong>OrbitFive Technologies Limited</strong> · Nigeria<br /><i>...power for everyday life!</i></p>
+    <p style="margin-top:6px;">Website Powered by Godfather Creative Planet | +234 812 419 4337</p>
   </footer>
 
   <!-- ============================================================
@@ -1782,21 +1782,8 @@
        RENDER CAROUSEL
     ============================================================= */
     function renderCarousel() {
-      const track = document.getElementById('carousel-track');
-      track.innerHTML = PRODUCTS.map(p => `
-        <div class="product-card" onclick="openModal(${p.id})">
-          <div class="product-img">
-            ${p.image
-              ? `<img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;" />`
-              : p.emoji
-            }
-          </div>
-          <div class="product-info">
-            <h4>${p.name}</h4>
-            ${priceHTML(p.price, p.originalPrice)}
-          </div>
-        </div>
-      `).join('');
+      // Always respect the current search and filter selections.
+      filterProducts();
     }
 
     function scrollCarousel(dir) {
@@ -1829,30 +1816,34 @@
     }
 
     function filterProducts() {
-      const search = document
-        .getElementById('product-search')
-        .value.toLowerCase().trim();
+      const searchInput = document.getElementById('product-search');
+      const brandFilter = document.getElementById('brand-filter');
+      const typeFilter = document.getElementById('type-filter');
 
-      const selectedBrand =
-        document.getElementById('brand-filter').value;
+      const search = (searchInput.value || '').toLowerCase().trim();
+      const selectedBrand = brandFilter.value || '';
+      const selectedType = typeFilter.value || '';
 
-      const selectedType =
-        document.getElementById('type-filter').value;
-
+      // Apply all active conditions together.
+      // With no search term and default filters, every product is shown.
       const filtered = PRODUCTS.filter(p => {
         const searchableText = [
           p.name,
           p.brand,
           p.type,
           p.desc,
-          p.benefit
-        ].join(' ').toLowerCase();
+          p.benefit,
+          p.benefitjs
+        ]
+          .filter(value => value !== null && value !== undefined)
+          .join(' ')
+          .toLowerCase();
 
-        return (
-          searchableText.includes(search) &&
-          (!selectedBrand || p.brand === selectedBrand) &&
-          (!selectedType || p.type === selectedType)
-        );
+        const matchesSearch = !search || searchableText.includes(search);
+        const matchesBrand = !selectedBrand || p.brand === selectedBrand;
+        const matchesType = !selectedType || p.type === selectedType;
+
+        return matchesSearch && matchesBrand && matchesType;
       });
 
       renderFilteredCarousel(filtered);
@@ -1862,10 +1853,12 @@
       const track = document.getElementById('carousel-track');
       const count = document.getElementById('results-count');
 
-      count.textContent =
-        `Showing ${products.length} of ${PRODUCTS.length} products`;
+      // Start each new result set at the beginning of the carousel.
+      track.scrollLeft = 0;
 
-      if (!products.length) {
+      count.textContent = `Showing ${products.length} of ${PRODUCTS.length} products`;
+
+      if (products.length === 0) {
         track.innerHTML = `
           <div class="no-products">
             <span>🔍</span>
